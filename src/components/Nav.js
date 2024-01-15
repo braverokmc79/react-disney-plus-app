@@ -56,7 +56,7 @@ const Nav = () => {
   return (
     <NavWrapper show={show}>
       <Logo>
-        <img src="/images/logo.svg" alt='Disney Plus logo' 
+        <img src={`${process.env.PUBLIC_URL}/images/logo.svg`} alt='Disney Plus logo' 
           onClick={() =>(window.location.href = '/' )}
         />
       </Logo>
