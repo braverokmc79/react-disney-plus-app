@@ -4,6 +4,7 @@ import axiosInnstance from '../api/axios';
 import requests from '../api/requests';
 
 import './Banner.css';
+import styled from 'styled-components';
 
 // const fetch = require('node-fetch');
 // const url = 'https://api.themoviedb.org/3/movie/movie_id?language=en-US';
@@ -12,6 +13,44 @@ import './Banner.css';
 //   .then(res => res.json())
 //   .then(json => console.log(json))
 //   .catch(err => console.error('error:' + err));
+
+
+const Container =styled.div`
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+
+`;
+
+const HomeContainer =styled.div`
+    width: 100%;
+    height: 100%;
+
+`;
+
+
+const Iframe =styled.iframe`
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.65;
+  border:none;
+
+  &::after{
+    content:"";  
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+  
+  }
+
+`
+
 
 const Banner = () => {
 
@@ -48,50 +87,71 @@ const Banner = () => {
 
   //https://image.tmdb.org/t/p/original/iNgn9LP0iMuLSnWqolivcY3Y7F6.jpg
 
+    //https://image.tmdb.org/t/p/w1280/qzgEPduJyQ6RkgMdn4nbjdKUYJM.jpg
+  //https://api.themoviedb.org/3/movie//buvBq2zLP7CcJth8tjrI4znvfEO/images
+ //`url(https://image.tmdb.org/t/p/original${movie.poster_path})` 
+
   const truncate=(str, n) => {  
     return str?.length > n? str.substr(0, n) + '...' : str;  
   };
 
 
+  if(isClicked){
+    return (
+      <>
+      <Container >
+        <HomeContainer>
+        
+          <Iframe
+            src={`https://youtube.com/embed/${movie?.videos?.results[0]?.key}?controls=0&loop=1&mute=1&playlist=${movie?.videos?.results[0]?.key}`}
+            width="640"
+            height="360"
+            allow='autoplay; fullscreen'
+          >
+
+          </Iframe>
+
+        </HomeContainer>
+      </Container>      
+      <button onClick={()=>setIsClicked(false)} className='btn-close'>X</button>
+      </>
+
+    ) 
+  }else{
 
   return (
-    <header className='banner'
-      style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.poster_path})` ,
-        backgroundPosition:"top center",
-        backgroundSize:"50% auto",
-        objectFit:"fill",
-        backgroundRepeat:"no-repeat",
-      }}
-    >
+          <header className='banner'
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.poster_path})` ,
+              backgroundPosition:"top center",
+              backgroundSize:"cover",
+              backgroundRepeat:"no-repeat",
+            }}
+          >
 
-    <div className='banner__contents'> 
-       <h1 className='banner__title'>
-            {movie.title || movie.name || movie.original_name}       
-       </h1>
+          <div className='banner__contents'> 
+            <h1 className='banner__title'>
+                  {movie.title || movie.name || movie.original_name}       
+            </h1>
 
+            <div className='banner__buttons'>
+              {movie?.videos?.results[0]?.key&&
+                  <button className='banner__button play'
+                    onClick={()=>setIsClicked(true)}
+                  >Play</button>
+              }      
+            </div>
+            
+            <p className='banner__description'>
+                {truncate(movie?.overview, 100)}
+            </p>
 
-      <div className='banner__buttons'>
-        {movie?.videos?.results[0]?.key&&
-            <button className='banner__button play'
-              onClick={()=>setIsClicked(true)}
-            >Play</button>
-        }      
-      </div>
-      
-      <p className='banner__description'>
-          {truncate(movie?.overview, 100)}
-      </p>
-
-    </div>
-    
-    <div className='bannner--fadeBottom'  />
-
-
-    </header>
-  )
-
-
+          </div>
+          
+          <div className='bannner--fadeBottom'  />
+          </header>
+        )
+    }
 }
 
 export default Banner
