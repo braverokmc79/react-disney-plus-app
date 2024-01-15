@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import axiosInnstance from '../api/axios';
 import requests from '../api/requests';
