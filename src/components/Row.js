@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { axiosInnstance } from '../api/axios';
 import './Row.css';
+import MovieModal from './MovieModal';
 
 const Row = ({title, id,fetchUrl}) => {
   const [movies, setMovies] = useState([]);
-  
-  const fetchMovieData= useCallback( async () => {
-    const response= await axiosInnstance.get(fetchUrl, {});
-    
-    console.log("response ==> ", response.data.results);
+  const [modalOpen, setModalOpen] = useState(false);
+  //클릭한 영화 정보 가져오기
+  const [movieSelected, setMovieSelection] = useState({});
 
+
+  const fetchMovieData= useCallback( async () => {
+    const response= await axiosInnstance.get(fetchUrl, {});      
     setMovies(response.data.results);
   }, [fetchUrl] );
 
@@ -18,11 +20,16 @@ const Row = ({title, id,fetchUrl}) => {
     fetchMovieData();
   }, [fetchMovieData]);
 
-  console.log("id ==> ", document.getElementById(id));
 
-  const handleClick=(e)=>{
-    console.log("handleClick ==> ", e);
-  }
+  const handleClick=useCallback((movie)=>{
+    console.log("movie ",movie);
+
+    setModalOpen(true);
+    setMovieSelection(movie);
+  }, [setModalOpen, setMovieSelection]);
+
+
+
 
   return (
     <div>
@@ -41,8 +48,7 @@ const Row = ({title, id,fetchUrl}) => {
           {movies.map((movie, index) => (
             <div className='row__poster' key={index}>
               <img src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`} alt={movie.title} 
-                onClick={()=>handleClick(movie)}
-              
+                onClick={()=>handleClick(movie)}              
               />
             </div>
           ))}   
@@ -56,9 +62,15 @@ const Row = ({title, id,fetchUrl}) => {
                 {">"}
             </span>            
           </div>
-
         </div>
 
+          {modalOpen && 
+            <MovieModal
+              {...movieSelected}
+              setModalOpen={setModalOpen}
+            />          
+          }
+          
     </div>
   )
 }
