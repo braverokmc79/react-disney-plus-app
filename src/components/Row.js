@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { axiosInnstance } from '../api/axios';
+import './Row.css';
 
 const Row = ({title, id,fetchUrl}) => {
   const [movies, setMovies] = useState([]);
@@ -37,7 +38,7 @@ const Row = ({title, id,fetchUrl}) => {
          
           {movies.map((movie, index) => (
             <div className='row__poster' key={index}>
-              <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} width={100} 
+              <img src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`} alt={movie.title} 
                 onClick={()=>handleClick(movie)}
               
               />
