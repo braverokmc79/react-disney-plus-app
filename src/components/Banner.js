@@ -80,14 +80,14 @@ const Banner = () => {
       params:{append_to_response:"videos"} 
     });
   
-    console.log("widthImageList", movieId);
+   // console.log("widthImageList", movieId);
 
 
     //가로형 이미지 목록 가져오기
     //https://api.themoviedb.org/3/movie/1071215/images/?api_key=08d90cc4e7968b1f8e51588a0d42cf06&language=en-US&include_image_language=en
     //https://api.themoviedb.org/3/movie/1071215/images?api_key=0a08e38b874d0aa2d426ffc04357069d&language=en-US&include_image_language=en
     const {data: widthImageList}= await axiosWidthImageInnstance.get(`${movieId}/images`,{});
-    setBackgroundPositionPoster( widthImageList?.backdrops[0]?.file_path);
+    setBackgroundPositionPoster( widthImageList?.backdrops[0]?.file_path || movie.poster_path);
     // console.log("widthImageList ==> ", widthImageList.backdrops);
     // console.log("한개 가져오기 widthImageList ==> ",movieId , widthImageList.backdrops[0].file_path);
 
@@ -131,12 +131,12 @@ const Banner = () => {
     ) 
   }else{
 
-    console.log("movie ==> ", movie);
+   // console.log("movie ==> ", movie);
 
   return (
 
     
-          <header className='banner'
+    backgroundPositionPoster && <header className='banner'
             style={{
               // backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.poster_path})` ,
               backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundPositionPoster})`,
