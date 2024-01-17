@@ -141,7 +141,7 @@ const Banner = () => {
               // backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.poster_path})` ,
               backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundPositionPoster})`,
               backgroundPosition:"top center",
-              backgroundSize:"100% 100%",
+              backgroundSize:"cover",
               backgroundRepeat:"no-repeat",
             }}
           >
