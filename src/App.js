@@ -23,7 +23,8 @@ function App() {
     <div className="App">
        <Routes>        
           <Route path="/"  element={<Layout />}  >
-              <Route index element={<LoginPage />} />
+              {/* <Route index element={<LoginPage />} /> */}
+              <Route index element={<MainPage />} />   
               <Route path="main" element={<MainPage />} />   
               <Route path=":movieId" element={<DetailPage  />} />   
               <Route path="search" element={ <SearchPage />} />   

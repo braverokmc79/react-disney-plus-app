@@ -148,3 +148,27 @@
     }
 }
 
+
+
+.swiper-pagination{
+    text-align: right !important;
+}
+
+.swiper-pagination-bullet{
+    background: gray !important;
+    opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active{
+    background-color: #fff !important;
+}
+
+.swiper-horizontal {
+    text-align: center !important;
+}
+.swiper .swiper-button-next, .swiper .swiper-button-prev{
+    color: #fff;
+}
+.row__poster{
+    cursor: pointer;
+}

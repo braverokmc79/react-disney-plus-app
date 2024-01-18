@@ -5,16 +5,19 @@ import Category from '../../components/Category'
 import Row from '../../components/Row'
 import styled from 'styled-components'
 import requests from '../../api/requests'
+import Footer from '../../components/Footer'
 
 const MainPage = () => {
   return (
     <Container >
         <Banner />
         <Category />
-        <Row title="Trending Now" id="TN"  fetchUrl={requests.fetchTrending} />
-        <Row title="Top Rated" id="TR"  fetchUrl={requests.fetchTopRated} />
-        <Row title="Action Movies" id="AM"  fetchUrl={requests.fetchActionMovies} />
-        <Row title="Comedy Movies" id="CM"  fetchUrl={requests.fetchComedyMovies} />
+        <Row title="Trending Now" id="TN" delay={2000}  fetchUrl={requests.fetchTrending} />
+        <Row title="Top Rated" id="TR"  delay={4000}  fetchUrl={requests.fetchTopRated} />
+        <Row title="Action Movies" id="AM" delay={6000} fetchUrl={requests.fetchActionMovies} />
+        <Row title="Comedy Movies" id="CM"  delay={8000} fetchUrl={requests.fetchComedyMovies} />
+
+        <Footer />
   </Container>
   )
 }
