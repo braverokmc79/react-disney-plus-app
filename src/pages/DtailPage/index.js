@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import MovieModal from './../../components/MovieModal/index';
 import { axiosInnstance } from '../../api/axios';
 
 const DetailPage = () => {
@@ -15,7 +14,6 @@ const DetailPage = () => {
 
   async function fetchMovie() {
       const response=await  axiosInnstance.get(`/movie/${movieId}`)
-
       console.log(response.data);
       setMovie(response.data);
   }
