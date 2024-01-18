@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { axiosInnstance } from '../../api/axios';
 import './SearchPage.css';
-
+import { useDebounce } from '../../hooks/useDebounce';
 
 //Throttle
-let timer;
-function debounce(callbackFn, timeout) {
-  if(timer) {
-      clearTimeout(timer);
-  }
+// let timer;
+// function debounce(callbackFn, timeout) {
+//   if(timer) {
+//       clearTimeout(timer);
+//   }
 
-  timer = setTimeout(() => {
-      callbackFn();
-  }, timeout);
-}
+//   timer = setTimeout(() => {
+//       callbackFn();
+//   }, timeout);
+// }
 
 
 
@@ -27,23 +27,24 @@ const SearchPage = () => {
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
+
   let query=useQuery();
-  const searchTerm=query.get('q');
+  //const searchTerm=query.get('q');
+  const debounceSearchTerm=useDebounce(query.get('q'), 500);
 
 
   useEffect(() => {
-    if(searchTerm){
-      debounce(() => {      
-        fetchSearchMovie(searchTerm);            
-        console.log(searchResults.length);
-      }, 300);     
+    if(debounceSearchTerm){
+      fetchSearchMovie(debounceSearchTerm);   
     }
-  }, [searchTerm]);
+  }, [debounceSearchTerm]);
 
 
-  const fetchSearchMovie = async(searchTerm) => {
+
+
+  const fetchSearchMovie = async(debounceSearchTerm) => {
       try {
-        const response=await axiosInnstance.get(`/search/multi?include_adult=false&query=${searchTerm}`);
+        const response=await axiosInnstance.get(`/search/multi?include_adult=false&query=${debounceSearchTerm}`);
         setSearchResults(response.data.results);
             
       } catch (error) {
@@ -86,7 +87,7 @@ const SearchPage = () => {
         <section className='no-results'>
           <div className='no-results__text'>
             <p>
-                찾고자하는 검색어 "{searchTerm}"  에 맞는 영화가 없습니다.
+                찾고자하는 검색어 "{debounceSearchTerm}"  에 맞는 영화가 없습니다.
             </p>
           </div>
         </section>
@@ -98,5 +99,3 @@ const SearchPage = () => {
 }
 
 export default SearchPage
-
-
