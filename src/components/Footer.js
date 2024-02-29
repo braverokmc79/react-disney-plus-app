@@ -9,7 +9,7 @@ const Footer = () => {
                     <img src={`${process.env.PUBLIC_URL}/images/logo.svg`} width={100} alt="Disney Plus logo" />
                 </div>
                 <div>
-                    <h2 style={{textAlign:"center"}}>Macaronics.net</h2>
+                    <h2 style={{textAlign:"center"}}>최준호-환급신청합니다.</h2>
                 </div>
 
               </div>    

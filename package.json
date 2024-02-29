@@ -5,9 +5,6 @@
   "version": "0.1.0",
 
   "private": true,
-
-  "homepage": "https://braverokmc79.github.io/react-disney-plus-app/",
-
   "dependencies": {
 
     "@testing-library/jest-dom": "^5.17.0",
