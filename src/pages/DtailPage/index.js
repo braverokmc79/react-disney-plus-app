@@ -9,7 +9,7 @@ const DetailPage = () => {
 
   useEffect(() => {
     fetchMovie();
-  }, [movieId]);
+  }, );
 
 
   async function fetchMovie() {

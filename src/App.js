@@ -2,7 +2,6 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import './App.css';
 import MainPage from './pages/MainPage';
 import Nav from './components/Nav';
-import LoginPage from './pages/LoginPage/index';
 import SearchPage from './pages/SearchPage/index';
 import DetailPage from './pages/DtailPage/index';
 
