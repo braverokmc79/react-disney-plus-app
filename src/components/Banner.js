@@ -56,9 +56,9 @@ const Banner = () => {
    const [isClicked, setIsClicked] = useState(false);
    const  [backgroundPositionPoster, setBackgroundPositionPoster] =useState("");
 
-  useEffect(() => {
+   useEffect(() => {
     fetchData();
-  }, );
+  }, []);
 
 
   
